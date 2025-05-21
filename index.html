@@ -236,57 +236,27 @@
     </style>
 </head>
 <body>
-    <div class="header">
-        <button class="menu-btn" id="menu-toggle"><i class="fas fa-bars"></i></button>
-        <h1>Visualización de Componentes Eléctricos</h1>
-        <div></div>
-    </div>
-
-    <div class="sidebar" id="sidebar">
-        <button class="sidebar-close" id="sidebar-close"><i class="fas fa-times"></i></button>
-        
-        <div class="sidebar-section">
-            <div class="sidebar-title">Componentes Eléctricos</div>
-            <ul class="sidebar-menu">
-                <li><button class="component-btn active" data-component="resistor">Resistor</button></li>
-                <li><button class="component-btn" data-component="capacitor">Capacitor</button></li>
-                <li><button class="component-btn" data-component="inductor">Inductor</button></li>
-                <li><button class="component-btn" data-component="diode">Diodo</button></li>
-                <li><button class="component-btn" data-component="transistor">Transistor</button></li>
-            </ul>
+    <div class="controls">
+        <h2>Control de Visualización de Componentes Eléctricos</h2>
+        <div class="component-selector">
+            <button class="component-btn active" data-component="resistor">Resistor</button>
+            <button class="component-btn" data-component="capacitor">Capacitor</button>
+            <button class="component-btn" data-component="inductor">Inductor</button>
+            <button class="component-btn" data-component="diode">Diodo</button>
+            <button class="component-btn" data-component="transistor">Transistor</button>
         </div>
-        
-        <div class="sidebar-section">
-            <div class="sidebar-title">Conceptos Matemáticos</div>
-            <ul class="sidebar-menu">
-                <li><button class="concept-btn active" data-concept="derivative">Derivada Imaginaria</button></li>
-                <li><button class="concept-btn" data-concept="integral">Integral Imaginaria</button></li>
-                <li><button class="concept-btn" data-concept="euler">Euler Imaginario</button></li>
-                <li><button class="concept-btn" data-concept="laplace">Transformada de Laplace</button></li>
-            </ul>
+        <div class="concept-selector">
+            <button class="concept-btn active" data-concept="derivative">Derivada Imaginaria</button>
+            <button class="concept-btn" data-concept="integral">Integral Imaginaria</button>
+            <button class="concept-btn" data-concept="euler">Euler Imaginario</button>
+            <button class="concept-btn" data-concept="laplace">Transformada de Laplace</button>
         </div>
     </div>
 
     <div class="container">
-        <div class="controls">
-            <div class="chart-title-container">
-                <h3 id="chart-title">Comportamiento Eléctrico del Resistor</h3>
-            </div>
-            <div class="playback-controls">
-                <button class="playback-btn" id="play-pause-btn"><i class="fas fa-pause"></i></button>
-                <div class="speed-control">
-                    <span class="speed-label">Velocidad:</span>
-                    <input type="range" min="0.5" max="3" step="0.5" value="1" class="speed-slider" id="speed-slider">
-                    <span class="speed-value" id="speed-value">1x</span>
-                </div>
-            </div>
-        </div>
         <div class="chart-container">
+            <h3 id="chart-title">Comportamiento Eléctrico del Resistor</h3>
             <canvas id="electricityChart"></canvas>
-            <div class="chart-axis-info">
-                <div class="axis-label">Eje X: Tiempo (segundos)</div>
-                <div class="axis-label">Eje Y: Amplitud eléctrica (V o A, según componente)</div>
-            </div>
             <div class="visual-container">
                 <div class="component-visual" id="component-animation">⚡</div>
             </div>
@@ -332,11 +302,7 @@ Curva[f(t), g(t), t, 0, 2π]
                 color: "rgb(255, 99, 132)",
                 generateData: (t) => Math.sin(t * 0.1) * 5,
                 animation: (t) => Math.sin(t * 0.1) > 0 ? "→" : "←",
-                geogebra: "f(x) = sin(x)\ng(x) = x/5\nCurva[f(t), g(t), t, 0, 10π]",
-                axisInfo: {
-                    x: "Tiempo (segundos)",
-                    y: "Voltaje (V)"
-                }
+                geogebra: "f(x) = sin(x)\ng(x) = x/5\nCurva[f(t), g(t), t, 0, 10π]"
             },
             capacitor: {
                 name: "Capacitor",
@@ -353,11 +319,7 @@ Curva[f(t), g(t), t, 0, 2π]
                     else if (val > -0.7) return "---";
                     else return "----";
                 },
-                geogebra: "f(x) = sin(x/2) * 4 + cos(x) * 2\ng(x) = cos(x/2) * 2\nCurva[f(t), g(t), t, 0, 20π]",
-                axisInfo: {
-                    x: "Tiempo (segundos)",
-                    y: "Carga (Q)"
-                }
+                geogebra: "f(x) = sin(x/2) * 4 + cos(x) * 2\ng(x) = cos(x/2) * 2\nCurva[f(t), g(t), t, 0, 20π]"
             },
             inductor: {
                 name: "Inductor",
@@ -368,11 +330,7 @@ Curva[f(t), g(t), t, 0, 2π]
                 animation: (t) => {
                     return "∿" + "∿".repeat(Math.floor(Math.abs(Math.sin(t * 0.1) * 2) + 1));
                 },
-                geogebra: "f(x) = sin(x/10) * 3 + sin(x/5) * 2\ng(x) = cos(x/10) * 2\nCurva[f(t), g(t), t, 0, 20π]",
-                axisInfo: {
-                    x: "Tiempo (segundos)",
-                    y: "Corriente (A)"
-                }
+                geogebra: "f(x) = sin(x/10) * 3 + sin(x/5) * 2\ng(x) = cos(x/10) * 2\nCurva[f(t), g(t), t, 0, 20π]"
             },
             diode: {
                 name: "Diodo",
@@ -387,11 +345,7 @@ Curva[f(t), g(t), t, 0, 2π]
                     const v = Math.sin(t * 0.1);
                     return v > 0 ? "→→" : "·";
                 },
-                geogebra: "f(x) = sin(x/10)\ng(x) = If[f(x) > 0, exp(f(x)) - 1, 0.01 * f(x)]\nCurva[f(t), g(t), t, 0, 20π]",
-                axisInfo: {
-                    x: "Tiempo (segundos)",
-                    y: "Corriente (A)"
-                }
+                geogebra: "f(x) = sin(x/10)\ng(x) = If[f(x) > 0, exp(f(x)) - 1, 0.01 * f(x)]\nCurva[f(t), g(t), t, 0, 20π]"
             },
             transistor: {
                 name: "Transistor",
@@ -407,11 +361,7 @@ Curva[f(t), g(t), t, 0, 2π]
                     if (val > 0) return "⇉".repeat(Math.floor(val * 5) + 1);
                     else return "·";
                 },
-                geogebra: "f(x) = sin(x/20) * 0.5\ng(x) = If[f(x) > 0, f(x) * 10, f(x) * 0.1]\nCurva[f(t), g(t), t, 0, 40π]",
-                axisInfo: {
-                    x: "Tiempo (segundos)",
-                    y: "Ganancia (Ic/Ib)"
-                }
+                geogebra: "f(x) = sin(x/20) * 0.5\ng(x) = If[f(x) > 0, f(x) * 10, f(x) * 0.1]\nCurva[f(t), g(t), t, 0, 40π]"
             }
         };
 
