@@ -1,0 +1,635 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2487.6">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html lang="es"&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;title&gt;Visualización de Componentes Eléctricos y Matemáticas Especiales&lt;/title&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.8.0/math.min.js"&gt;&lt;/script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"&gt;&lt;/script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"&gt;&lt;/script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;style&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>body {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-family: Arial, sans-serif;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin: 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: #f5f5f5;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.container {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>flex-wrap: wrap;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>gap: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>max-width: 1200px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin: 0 auto;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.header {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>justify-content: space-between;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>align-items: center;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: #2c3e50;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: white;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 10px 20px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 2px 4px rgba(0,0,0,0.1);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.menu-btn {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border: none;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: none;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: white;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 24px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>cursor: pointer;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.sidebar {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>position: fixed;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>top: 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>left: -300px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 300px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: #34495e;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: white;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>z-index: 100;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transition: left 0.3s ease;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>overflow-y: auto;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding-top: 60px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 2px 0 5px rgba(0,0,0,0.2);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.sidebar.open {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>left: 0;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.sidebar-close {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>position: absolute;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>top: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>right: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border: none;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: none;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: white;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 24px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>cursor: pointer;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.sidebar-section {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 15px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-bottom: 1px solid #4a6278;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.sidebar-title {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 18px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.sidebar-menu {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>list-style-type: none;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin: 0;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.sidebar-menu li {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.sidebar-menu button {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: none;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border: none;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #ecf0f1;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>cursor: pointer;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>text-align: left;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 8px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 4px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transition: background-color 0.2s;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.sidebar-menu button:hover {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: #4a6278;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.sidebar-menu button.active {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: #2980b9;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.chart-container {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>flex: 1;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>min-width: 500px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: white;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 8px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 15px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.math-container {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>flex: 1;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>min-width: 500px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: white;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 8px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 15px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>overflow-y: auto;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>max-height: 600px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.controls {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: white;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 8px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 15px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.component-selector {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>gap: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.component-btn {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 8px 15px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border: none;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 4px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: #e0e0e0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>cursor: pointer;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transition: background-color 0.3s;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.component-btn.active {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: #4CAF50;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: white;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.math-tab {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-bottom: 1px solid #ddd;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding-bottom: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.math-content {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: #f9f9f9;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 4px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-top: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.formula-display {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: #f0f8ff;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 4px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin: 10px 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-family: 'Courier New', monospace;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.concept-selector {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>gap: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.concept-btn {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 6px 12px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border: none;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 4px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: #e0e0e0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>cursor: pointer;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transition: background-color 0.3s;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.concept-btn.active {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: #2196F3;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: white;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.visual-container {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 200px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: #f9f9f9;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 4px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-top: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>position: relative;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>overflow: hidden;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.component-visual {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>position: absolute;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>top: 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>left: 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>align-items: center;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>justify-content: center;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 36px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.geogebra-export {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-top: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: #ffebee;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 4px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.geogebra-code {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: #fff;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 4px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-top: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-family: 'Courier New', monospace;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>white-space: pre-wrap;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.math-explanation {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-top: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.math-title {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-weight: bold;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 1.2em;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #333;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.explanation-content {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>flex-wrap: wrap;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>gap: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.formula-section {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>flex: 1;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>min-width: 200px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.explanation-section {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>flex: 2;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>min-width: 200px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/style&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="header"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;button class="menu-btn" id="menu-toggle"&gt;&lt;i class="fas fa-bars"&gt;&lt;/i&gt;&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;h1&gt;Visualización de Componentes Eléctricos&lt;/h1&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="sidebar" id="sidebar"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;button class="sidebar-close" id="sidebar-close"&gt;&lt;i class="fas fa-times"&gt;&lt;/i&gt;&lt;/button&gt;</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="sidebar-section"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="sidebar-title"&gt;Componentes Eléctricos&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;ul class="sidebar-menu"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;li&gt;&lt;button class="component-btn active" data-component="resistor"&gt;Resistor&lt;/button&gt;&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;li&gt;&lt;button class="component-btn" data-component="capacitor"&gt;Capacitor&lt;/button&gt;&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;li&gt;&lt;button class="component-btn" data-component="inductor"&gt;Inductor&lt;/button&gt;&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;li&gt;&lt;button class="component-btn" data-component="diode"&gt;Diodo&lt;/button&gt;&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;li&gt;&lt;button class="component-btn" data-component="transistor"&gt;Transistor&lt;/button&gt;&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/ul&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="sidebar-section"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="sidebar-title"&gt;Conceptos Matemáticos&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;ul class="sidebar-menu"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;li&gt;&lt;button class="concept-btn active" data-concept="derivative"&gt;Derivada Imaginaria&lt;/button&gt;&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;li&gt;&lt;button class="concept-btn" data-concept="integral"&gt;Integral Imaginaria&lt;/button&gt;&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;li&gt;&lt;button class="concept-btn" data-concept="euler"&gt;Euler Imaginario&lt;/button&gt;&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;li&gt;&lt;button class="concept-btn" data-concept="laplace"&gt;Transformada de Laplace&lt;/button&gt;&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/ul&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="container"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="controls"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="chart-title-container"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;h3 id="chart-title"&gt;Comportamiento Eléctrico del Resistor&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="playback-controls"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;button class="playback-btn" id="play-pause-btn"&gt;&lt;i class="fas fa-pause"&gt;&lt;/i&gt;&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="speed-control"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span class="speed-label"&gt;Velocidad:&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;input type="range" min="0.5" max="3" step="0.5" value="1" class="speed-slider" id="speed-slider"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span class="speed-value" id="speed-value"&gt;1x&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="chart-container"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;canvas id="electricityChart"&gt;&lt;/canvas&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="chart-axis-info"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="axis-label"&gt;Eje X: Tiempo (segundos)&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="axis-label"&gt;Eje Y: Amplitud eléctrica (V o A, según componente)&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="visual-container"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="component-visual" id="component-animation"&gt;⚡&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="math-container"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;h3&gt;Matemáticas Especiales&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div id="math-explanation" class="math-explanation"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="math-title"&gt;Derivada Imaginaria aplicada al Resistor&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="explanation-content"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="formula-section"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="formula-display"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>$$\frac{d}{dt}[f(t)] = \lim_{h \to 0}\frac{f(t+h)-f(t)}{h}$$</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>$$\frac{d}{dt}[e^{i\omega t}] = i\omega e^{i\omega t}$$</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="explanation-section"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;p&gt;La derivada imaginaria extiende el concepto de derivada al plano complejo. Para un resistor, esto nos permite analizar cómo cambia la corriente instantáneamente cuando aplicamos un voltaje sinusoidal.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;p&gt;En el caso del resistor ideal, la relación derivativa muestra que el cambio instantáneo de corriente es proporcional al cambio de voltaje, según la ley de Ohm.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="geogebra-export"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;h4&gt;Exportar a GeoGebra&lt;/h4&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;p&gt;Para visualizar esta gráfica en GeoGebra, copia el siguiente código:&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="geogebra-code" id="geogebra-code"&gt;</p>
+<p class="p1">f(x) = sin(x)</p>
+<p class="p1">g(x) = cos(x)</p>
+<p class="p1">Curva[f(t), g(t), t, 0, 2π]</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Configuración global y variables</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const components = {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>resistor: {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>name: "Resistor",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>formula: "V = I * R",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>description: "Un resistor obedece la ley de Ohm, donde el voltaje es proporcional a la corriente.",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>color: "rgb(255, 99, 132)",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>generateData: (t) =&gt; Math.sin(t * 0.1) * 5,</p>
+<p class="p1"><span class="Apple-converted-space">                </span>animation: (t) =&gt; Math.sin(t * 0.1) &gt; 0 ? "→" : "←",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>geogebra: "f(x) = sin(x)\ng(x) = x/5\nCurva[f(t), g(t), t, 0, 10π]",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>axisInfo: {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>x: "Tiempo (segundos)",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>y: "Voltaje (V)"</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>},</p>
+<p class="p1"><span class="Apple-converted-space">            </span>capacitor: {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>name: "Capacitor",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>formula: "I = C * dV/dt",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>description: "Un capacitor almacena carga, donde la corriente depende de la tasa de cambio del voltaje.",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>color: "rgb(54, 162, 235)",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>generateData: (t) =&gt; Math.sin(t * 0.05) * 4 + Math.cos(t * 0.1) * 2,</p>
+<p class="p1"><span class="Apple-converted-space">                </span>animation: (t) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const val = Math.sin(t * 0.05);</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>if (val &gt; 0.7) return "++++";</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>else if (val &gt; 0.3) return "+++";</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>else if (val &gt; 0) return "++";</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>else if (val &gt; -0.3) return "--";</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>else if (val &gt; -0.7) return "---";</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>else return "----";</p>
+<p class="p1"><span class="Apple-converted-space">                </span>},</p>
+<p class="p1"><span class="Apple-converted-space">                </span>geogebra: "f(x) = sin(x/2) * 4 + cos(x) * 2\ng(x) = cos(x/2) * 2\nCurva[f(t), g(t), t, 0, 20π]",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>axisInfo: {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>x: "Tiempo (segundos)",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>y: "Carga (Q)"</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>},</p>
+<p class="p1"><span class="Apple-converted-space">            </span>inductor: {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>name: "Inductor",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>formula: "V = L * dI/dt",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>description: "Un inductor se opone a cambios en la corriente, generando un voltaje proporcional a la tasa de cambio.",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>color: "rgb(255, 206, 86)",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>generateData: (t) =&gt; Math.sin(t * 0.1) * 3 + Math.sin(t * 0.2) * 2,</p>
+<p class="p1"><span class="Apple-converted-space">                </span>animation: (t) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>return "∿" + "∿".repeat(Math.floor(Math.abs(Math.sin(t * 0.1) * 2) + 1));</p>
+<p class="p1"><span class="Apple-converted-space">                </span>},</p>
+<p class="p1"><span class="Apple-converted-space">                </span>geogebra: "f(x) = sin(x/10) * 3 + sin(x/5) * 2\ng(x) = cos(x/10) * 2\nCurva[f(t), g(t), t, 0, 20π]",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>axisInfo: {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>x: "Tiempo (segundos)",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>y: "Corriente (A)"</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>},</p>
+<p class="p1"><span class="Apple-converted-space">            </span>diode: {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>name: "Diodo",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>formula: "I = Is * (e^(V/Vt) - 1)",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>description: "Un diodo permite el flujo de corriente en una dirección, con una relación exponencial entre corriente y voltaje.",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>color: "rgb(75, 192, 192)",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>generateData: (t) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const v = Math.sin(t * 0.1);</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>return v &gt; 0 ? Math.exp(v) - 1 : 0.01 * v;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>},</p>
+<p class="p1"><span class="Apple-converted-space">                </span>animation: (t) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const v = Math.sin(t * 0.1);</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>return v &gt; 0 ? "→→" : "·";</p>
+<p class="p1"><span class="Apple-converted-space">                </span>},</p>
+<p class="p1"><span class="Apple-converted-space">                </span>geogebra: "f(x) = sin(x/10)\ng(x) = If[f(x) &gt; 0, exp(f(x)) - 1, 0.01 * f(x)]\nCurva[f(t), g(t), t, 0, 20π]",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>axisInfo: {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>x: "Tiempo (segundos)",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>y: "Corriente (A)"</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>},</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transistor: {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>name: "Transistor",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>formula: "Ic = β * Ib",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>description: "Un transistor amplifica la corriente, con la corriente del colector proporcional a la corriente de la base.",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>color: "rgb(153, 102, 255)",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>generateData: (t) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const base = Math.sin(t * 0.05) * 0.5;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>return base &gt; 0 ? base * 10 : base * 0.1;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>},</p>
+<p class="p1"><span class="Apple-converted-space">                </span>animation: (t) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const val = Math.sin(t * 0.05);</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>if (val &gt; 0) return "⇉".repeat(Math.floor(val * 5) + 1);</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>else return "·";</p>
+<p class="p1"><span class="Apple-converted-space">                </span>},</p>
+<p class="p1"><span class="Apple-converted-space">                </span>geogebra: "f(x) = sin(x/20) * 0.5\ng(x) = If[f(x) &gt; 0, f(x) * 10, f(x) * 0.1]\nCurva[f(t), g(t), t, 0, 40π]",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>axisInfo: {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>x: "Tiempo (segundos)",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>y: "Ganancia (Ic/Ib)"</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>};</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>const mathConcepts = {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>derivative: {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>title: "Derivada Imaginaria",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>formulas: {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>resistor: "$$\\frac{d}{dt}[I(t)] = \\frac{1}{R}\\frac{dV(t)}{dt}$$$$\\frac{d}{dt}[e^{i\\omega t}] = i\\omega e^{i\\omega t}$$",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>capacitor: "$$I(t) = C\\frac{dV(t)}{dt}$$$$\\frac{d}{dt}[V_0 \\sin(\\omega t)] = V_0 \\omega \\cos(\\omega t)$$",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>inductor: "$$V(t) = L\\frac{dI(t)}{dt}$$$$\\frac{d}{dt}[I_0 e^{i\\omega t}] = i\\omega I_0 e^{i\\omega t}$$",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>diode: "$$\\frac{d}{dt}[I_s(e^{\\frac{V(t)}{V_T}}-1)] = \\frac{I_s}{V_T}e^{\\frac{V(t)}{V_T}}\\frac{dV(t)}{dt}$$",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>transistor: "$$\\frac{d}{dt}[I_c(t)] = \\beta \\frac{d}{dt}[I_b(t)]$$"</p>
+<p class="p1"><span class="Apple-converted-space">                </span>},</p>
+<p class="p1"><span class="Apple-converted-space">                </span>explanations: {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>resistor: "Para un resistor, la derivada imaginaría nos muestra cómo cambia la corriente instantáneamente cuando varía el voltaje. Esto es fundamental en circuitos AC donde las señales son de la forma \\(e^{i\\omega t}\\).",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>capacitor: "La corriente en un capacitor es proporcional a la derivada del voltaje. Con funciones sinusoidales complejas, esto produce un desfase de 90° entre voltaje y corriente.",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>inductor: "El inductor relaciona el voltaje con la derivada de la corriente. En el dominio complejo, esto produce un adelanto de fase de 90° del voltaje respecto a la corriente.",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>diode: "La derivada de la ecuación del diodo muestra la sensibilidad del cambio de corriente respecto a cambios de voltaje, mostrando su comportamiento no lineal.",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>transistor: "La derivada de la corriente del colector respecto al tiempo es proporcional a la derivada de la corriente de base, manteniendo el factor de amplificación."</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>},</p>
+<p class="p1"><span class="Apple-converted-space">            </span>integral: {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>title: "Integral Imaginaria",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>formulas: {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>resistor: "$$\\int I(t)dt = \\frac{1}{R}\\int V(t)dt$$$$\\int e^{i\\omega t}dt = \\frac{1}{i\\omega}e^{i\\omega t} + C$$",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>capacitor: "$$V(t) = \\frac{1}{C}\\int I(t)dt$$$$\\int I_0\\cos(\\omega t)dt = \\frac{I_0}{\\omega}\\sin(\\omega t) + C$$",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>inductor: "$$I(t) = \\frac{1}{L}\\int V(t)dt$$$$\\int V_0e^{i\\omega t}dt = \\frac{V_0}{i\\omega}e^{i\\omega t} + C$$",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>diode: "$$\\int I(t)dt = \\int I_s(e^{\\frac{V(t)}{V_T}}-1)dt$$",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>transistor: "$$\\int I_c(t)dt = \\beta \\int I_b(t)dt$$"</p>
+<p class="p1"><span class="Apple-converted-space">                </span>},</p>
+<p class="p1"><span class="Apple-converted-space">                </span>explanations: {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>resistor: "La integral de la corriente a través de un resistor está relacionada con la carga total que ha fluido. En el dominio complejo, esto relaciona potencia y energía.",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>capacitor: "La integral de la corriente dividida por la capacitancia nos da el voltaje en el capacitor. Esto representa la acumulación de carga en función del tiempo.",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>inductor: "La integral del voltaje dividida por la inductancia da la corriente. En señales complejas, esto se relaciona con el flujo magnético acumulado.",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>diode: "La integral de la corriente del diodo es compleja debido a su comportamiento no lineal y representa la carga total que ha fluido a través del dispositivo.",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>transistor: "La integral de la corriente del colector es proporcional a la integral de la corriente de base, manteniendo la relación de amplificación en términos de carga total."</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>},</p>
+<p class="p1"><span class="Apple-converted-space">            </span>euler: {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>title: "Euler Imaginario",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>formulas: {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>resistor: "$$V(t) = V_0e^{i\\omega t} = V_0(\\cos(\\omega t) + i\\sin(\\omega t))$$$$I(t) = \\frac{V_0}{R}e^{i\\omega t}$$",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>capacitor: "$$I(t) = C\\frac{d}{dt}[V_0e^{i\\omega t}] = i\\omega CV_0e^{i\\omega t}$$$$Z_C = \\frac{1}{i\\omega C}$$",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>inductor: "$$V(t) = L\\frac{d}{dt}[I_0e^{i\\omega t}] = i\\omega LI_0e^{i\\omega t}$$$$Z_L = i\\omega L$$",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>diode: "$$I(t) = I_s(e^{\\frac{V_0e^{i\\omega t}}{V_T}}-1)$$",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>transistor: "$$I_c(t) = \\beta I_b(t) = \\beta I_{b0}e^{i\\omega t}$$"</p>
+<p class="p1"><span class="Apple-converted-space">                </span>},</p>
+<p class="p1"><span class="Apple-converted-space">                </span>explanations: {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>resistor: "La identidad de Euler (\\(e^{i\\theta} = \\cos\\theta + i\\sin\\theta\\)) permite expresar señales sinusoidales en forma compacta. Para un resistor, voltaje y corriente permanecen en fase.",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>capacitor: "Usando la identidad de Euler vemos que la corriente en un capacitor se adelanta 90° al voltaje, lo que se muestra matemáticamente por el factor \\(i\\) que representa un giro de 90° en el plano complejo.",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>inductor: "Con la notación de Euler, el voltaje en un inductor se adelanta 90° a la corriente, representado por el factor \\(i\\) en la ecuación.",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>diode: "El comportamiento no lineal del diodo complica el análisis con la identidad de Euler, pero permite describir su respuesta a señales sinusoidales complejas.",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>transistor: "La identidad de Euler nos permite relacionar las corrientes de base y colector en el dominio complejo, manteniendo su relación de fase."</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>},</p>
+<p class="p1"><span class="Apple-converted-space">            </span>laplace: {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>title: "Transformada de Laplace",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>formulas: {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>resistor: "$$V(s) = I(s) \\cdot R$$$$\\mathcal{L}\\{e^{i\\omega t}\\} = \\frac{1}{s-i\\omega}$$",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>capacitor: "$$V(s) = I(s) \\cdot \\frac{1}{sC}$$$$Z_C(s) = \\frac{1}{sC}$$",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>inductor: "$$V(s) = I(s) \\cdot sL$$$$Z_L(s) = sL$$",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>diode: "$$\\mathcal{L}\\{I_s(e^{\\frac{V(t)}{V_T}}-1)\\} = \\text{compleja}$$",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>transistor: "$$I_c(s) = \\beta I_b(s)$$"</p>
+<p class="p1"><span class="Apple-converted-space">                </span>},</p>
+<p class="p1"><span class="Apple-converted-space">                </span>explanations: {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>resistor: "La transformada de Laplace convierte ecuaciones diferenciales en algebraicas. Para un resistor, la relación V=IR se mantiene en el dominio s, simplificando análisis de circuitos.",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>capacitor: "En el dominio de Laplace, el capacitor se representa como una impedancia \\(\\frac{1}{sC}\\), facilitando el análisis de circuitos complejos sin ecuaciones diferenciales.",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>inductor: "La transformada convierte el inductor en una impedancia \\(sL\\), permitiendo resolver circuitos RLC mediante álgebra en lugar de ecuaciones diferenciales.",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>diode: "La transformada de Laplace del comportamiento no lineal del diodo es compleja, pero permite análisis de pequeña señal mediante linealización.",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>transistor: "La relación entre corrientes de colector y base se mantiene en el dominio s, permitiendo análisis de amplificadores en frecuencia."</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>};</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Inicializar el gráfico</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const ctx = document.getElementById('electricityChart').getContext('2d');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const chartData = {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>labels: Array.from({length: 60}, (_, i) =&gt; i),</p>
+<p class="p1"><span class="Apple-converted-space">            </span>datasets: [{</p>
+<p class="p1"><span class="Apple-converted-space">                </span>label: 'Electricidad',</p>
+<p class="p1"><span class="Apple-converted-space">                </span>data: Array.from({length: 60}, (_, i) =&gt; components.resistor.generateData(i)),</p>
+<p class="p1"><span class="Apple-converted-space">                </span>borderColor: components.resistor.color,</p>
+<p class="p1"><span class="Apple-converted-space">                </span>backgroundColor: 'rgba(255, 99, 132, 0.1)',</p>
+<p class="p1"><span class="Apple-converted-space">                </span>fill: true,</p>
+<p class="p1"><span class="Apple-converted-space">                </span>tension: 0.4</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}]</p>
+<p class="p1"><span class="Apple-converted-space">        </span>};</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>const chartConfig = {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>type: 'line',</p>
+<p class="p1"><span class="Apple-converted-space">            </span>data: chartData,</p>
+<p class="p1"><span class="Apple-converted-space">            </span>options: {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>responsive: true,</p>
+<p class="p1"><span class="Apple-converted-space">                </span>animation: {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>duration: 0</p>
+<p class="p1"><span class="Apple-converted-space">                </span>},</p>
+<p class="p1"><span class="Apple-converted-space">                </span>scales: {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>y: {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>beginAtZero: false,</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>suggestedMin: -10,</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>suggestedMax: 10</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>};</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>const electricityChart = new Chart(ctx, chartConfig);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Variables de estado</p>
+<p class="p1"><span class="Apple-converted-space">        </span>let currentComponent = 'resistor';</p>
+<p class="p1"><span class="Apple-converted-space">        </span>let currentConcept = 'derivative';</p>
+<p class="p1"><span class="Apple-converted-space">        </span>let animationFrame;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>let timeCounter = 0;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Funciones de actualización</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function updateChart() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const component = components[currentComponent];</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>// Actualizar datos</p>
+<p class="p1"><span class="Apple-converted-space">            </span>electricityChart.data.datasets[0].data.shift();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>electricityChart.data.datasets[0].data.push(component.generateData(timeCounter));</p>
+<p class="p1"><span class="Apple-converted-space">            </span>electricityChart.data.datasets[0].borderColor = component.color;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>electricityChart.data.datasets[0].backgroundColor = component.color.replace('rgb', 'rgba').replace(')', ', 0.1)');</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>// Actualizar título</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('chart-title').textContent = `Comportamiento Eléctrico del ${component.name}`;</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>// Actualizar animación</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('component-animation').textContent = component.animation(timeCounter);</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>// Actualizar el gráfico</p>
+<p class="p1"><span class="Apple-converted-space">            </span>electricityChart.update();</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>// Incrementar contador de tiempo</p>
+<p class="p1"><span class="Apple-converted-space">            </span>timeCounter++;</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>// Continuar la animación</p>
+<p class="p1"><span class="Apple-converted-space">            </span>animationFrame = requestAnimationFrame(updateChart);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function updateMathExplanation() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const component = components[currentComponent];</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const concept = mathConcepts[currentConcept];</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const mathExplanationHTML = `</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="math-title"&gt;${concept.title} aplicada al ${component.name}&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="explanation-content"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="formula-section"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="formula-display"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>${concept.formulas[currentComponent]}</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="explanation-section"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;p&gt;${concept.explanations[currentComponent]}&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;p&gt;Aplicando esta matemática al ${component.name} con la fórmula básica ${component.formula}, podemos analizar su comportamiento eléctrico en términos complejos.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>`;</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('math-explanation').innerHTML = mathExplanationHTML;</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>// Actualizar código GeoGebra</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('geogebra-code').textContent = component.geogebra;</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>// Renderizar fórmulas matemáticas</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (window.MathJax) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>MathJax.typesetPromise();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Event listeners</p>
+<p class="p1"><span class="Apple-converted-space">        </span>document.querySelectorAll('.component-btn').forEach(button =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>button.addEventListener('click', function() {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>// Actualizar estado activo</p>
+<p class="p1"><span class="Apple-converted-space">                </span>document.querySelectorAll('.component-btn').forEach(btn =&gt; btn.classList.remove('active'));</p>
+<p class="p1"><span class="Apple-converted-space">                </span>this.classList.add('active');</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>// Actualizar componente actual</p>
+<p class="p1"><span class="Apple-converted-space">                </span>currentComponent = this.dataset.component;</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>// Actualizar visualización</p>
+<p class="p1"><span class="Apple-converted-space">                </span>updateMathExplanation();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p1"><span class="Apple-converted-space">        </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>document.querySelectorAll('.concept-btn').forEach(button =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>button.addEventListener('click', function() {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>// Actualizar estado activo</p>
+<p class="p1"><span class="Apple-converted-space">                </span>document.querySelectorAll('.concept-btn').forEach(btn =&gt; btn.classList.remove('active'));</p>
+<p class="p1"><span class="Apple-converted-space">                </span>this.classList.add('active');</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>// Actualizar concepto actual</p>
+<p class="p1"><span class="Apple-converted-space">                </span>currentConcept = this.dataset.concept;</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>// Actualizar visualización</p>
+<p class="p1"><span class="Apple-converted-space">                </span>updateMathExplanation();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p1"><span class="Apple-converted-space">        </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Iniciar animación</p>
+<p class="p1"><span class="Apple-converted-space">        </span>updateChart();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>updateMathExplanation();</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/script&gt;</p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
+</body>
+</html>
